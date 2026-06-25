@@ -380,60 +380,89 @@ function LoginPage({ onLogin }: { onLogin: (u: LoggedInUser) => void }) {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-sm">
-        {/* Logo */}
-        <div className="flex flex-col items-center mb-8 gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-md">
-            <LayoutGrid size={24} className="text-white" />
-          </div>
-          <div className="text-center">
-            <div className="text-lg font-bold text-foreground">Kika Global Studio</div>
-            <div className="text-xs text-muted-foreground mt-0.5">设计师平台 V0.1</div>
-          </div>
-        </div>
+    <div className="min-h-screen min-w-[1080px] overflow-hidden bg-[radial-gradient(circle_at_18%_22%,#dbeafe_0,#eff6ff_30%,transparent_58%),linear-gradient(135deg,#edf6ff_0%,#dff1ff_45%,#c9e6ff_100%)] flex items-center justify-center px-16 py-10 relative">
+      <div className="absolute -left-24 top-20 w-96 h-96 rounded-full bg-blue-300/25 blur-3xl" />
+      <div className="absolute right-4 bottom-0 w-[520px] h-[520px] rounded-full bg-sky-300/20 blur-3xl" />
+      <div className="absolute inset-0 opacity-50 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.45)_50%,transparent_100%)]" />
 
-        <div className="bg-card rounded-2xl border border-border shadow-[0_4px_24px_rgba(0,0,0,0.08)] p-6">
-          <h1 className="text-base font-semibold text-foreground mb-5">登录账号</h1>
+      <div className="relative z-10 w-full max-w-6xl grid grid-cols-[1.25fr_380px] gap-14 items-center">
+        <section className="relative min-h-[520px] flex flex-col justify-center">
+          <div className="mb-10">
+            <div className="inline-flex items-center rounded-full bg-gradient-to-r from-indigo-600 to-blue-500 px-3 py-1 text-[11px] font-semibold text-white shadow-lg shadow-blue-500/20">
+              一体化内容设计平台
+            </div>
+            <h1 className="mt-4 text-4xl font-bold leading-tight text-slate-900">Kika Global Studio</h1>
+            <p className="mt-3 text-sm text-slate-600 max-w-xl leading-relaxed">
+              需求分配、设计排期、资源流转与交付状态统一管理，让全球素材协作更清晰。
+            </p>
+          </div>
+
+          <div className="relative w-[560px] h-[390px]">
+            <div className="absolute left-20 top-28 w-[390px] h-[230px] rounded-full bg-blue-500/20 blur-3xl" />
+            <div className="absolute left-32 bottom-8 w-[300px] h-14 rounded-full bg-blue-800/10 blur-xl" />
+            <img
+              src="/assets/login-hero-cutout.png"
+              alt="Kika Global Studio visual"
+              className="absolute left-32 top-0 w-[340px] h-auto drop-shadow-[0_34px_58px_rgba(59,130,246,0.25)]" />
+
+            {[
+              { label: "智能运营", icon: <Users size={15} />, className: "left-2 top-[96px] text-indigo-600" },
+              { label: "数据总览", icon: <LayoutGrid size={15} />, className: "left-[398px] top-[74px] text-emerald-600" },
+              { label: "排期管理", icon: <Calendar size={15} />, className: "left-10 top-[238px] text-blue-600" },
+              { label: "任务监控", icon: <Clock size={15} />, className: "left-[386px] top-[236px] text-amber-600" },
+            ].map(item => (
+              <div key={item.label} className={`absolute ${item.className} flex items-center gap-2 rounded-2xl bg-white/45 px-4 py-2 text-xs font-semibold shadow-[0_14px_36px_rgba(30,64,175,0.12)] backdrop-blur-xl border border-white/70 ring-1 ring-white/40`}>
+                <span className="w-7 h-7 rounded-full bg-white/60 flex items-center justify-center shadow-inner">{item.icon}</span>
+                {item.label}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-white/70 bg-white/72 backdrop-blur-xl shadow-[0_24px_80px_rgba(30,64,175,0.18)] p-7">
+          <div className="text-center mb-6">
+            <h2 className="text-lg font-bold text-slate-900">欢迎登录</h2>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="text-xs font-semibold text-muted-foreground block mb-1.5">邮箱</label>
+              <label className="text-xs font-semibold text-slate-500 block mb-1.5">邮箱</label>
               <input value={email} onChange={e => { setEmail(e.target.value); setError(""); }}
                 type="email" placeholder="your@company.com" autoComplete="email"
-                className="w-full px-3 py-2.5 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary" />
+                className="w-full px-3 py-3 bg-white/85 border border-blue-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400/30 focus:border-blue-400 shadow-inner shadow-blue-50" />
             </div>
             <div>
-              <label className="text-xs font-semibold text-muted-foreground block mb-1.5">密码</label>
+              <label className="text-xs font-semibold text-slate-500 block mb-1.5">密码</label>
               <div className="relative">
                 <input value={password} onChange={e => { setPassword(e.target.value); setError(""); }}
                   type={showPw ? "text" : "password"} placeholder="请输入密码" autoComplete="current-password"
-                  className="w-full px-3 py-2.5 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary pr-10" />
+                  className="w-full px-3 py-3 bg-white/85 border border-blue-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400/30 focus:border-blue-400 pr-10 shadow-inner shadow-blue-50" />
                 <button type="button" onClick={() => setShowPw(v => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors">
                   {showPw ? <EyeOff size={14} /> : <Eye size={14} />}
                 </button>
               </div>
             </div>
             {error && <p className="text-xs text-red-500">{error}</p>}
             <button type="submit"
-              className="w-full py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors mt-2">
+              className="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl text-sm font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 mt-2">
               登录
             </button>
           </form>
-          <div className="mt-4 pt-4 border-t border-border">
-            <div className="text-[11px] text-muted-foreground mb-2">测试账号（密码均为 123456）</div>
-            <div className="grid grid-cols-2 gap-1.5">
+          <div className="mt-5 pt-4 border-t border-blue-100">
+            <div className="text-[11px] text-slate-500 mb-2">测试账号（密码均为 123456）</div>
+            <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto pr-1 [&::-webkit-scrollbar]:hidden">
               {ACCOUNTS.map(a => (
                 <button key={a.id} onClick={() => { setEmail(a.email); setPassword(a.password); setError(""); }}
-                  className="text-left px-2.5 py-1.5 rounded-lg bg-muted hover:bg-accent transition-colors">
-                  <div className="text-[11px] font-medium text-foreground">{a.name}</div>
+                  className="text-left px-2.5 py-2 rounded-xl bg-blue-50/70 hover:bg-blue-100/80 transition-colors border border-blue-100/60">
+                  <div className="text-[11px] font-semibold text-slate-700">{a.name}</div>
                   <div className={`text-[10px] ${roleTextClass(a.role)}`}>{a.role}</div>
                 </button>
               ))}
             </div>
           </div>
-        </div>
+        </section>
       </div>
+      <div className="absolute right-6 bottom-5 text-[11px] font-medium text-slate-500/80">设计师平台 V0.2</div>
     </div>
   );
 }
@@ -964,7 +993,7 @@ function SelectField<T extends string>({
   const selectedLabel = value || placeholder;
 
   return (
-    <div className={`relative ${className}`} onBlur={(e) => {
+    <div className={`relative z-20 ${className}`} onBlur={(e) => {
       if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOpen(false);
     }}>
       <button
@@ -1056,7 +1085,7 @@ function Sidebar({
           <LayoutGrid size={18} className="text-white" />
         </div>
         <span className="text-[10px] font-semibold text-foreground leading-tight text-center">Kika Global Studio</span>
-        <span className="w-16 text-center text-[9px] text-muted-foreground leading-tight">{text("设计师平台", "Designer Platform")} V0.1</span>
+        <span className="w-16 text-center text-[9px] text-muted-foreground leading-tight">{text("设计师平台", "Designer Platform")} V0.2</span>
       </div>
 
       {/* Nav — role-based */}
@@ -1733,6 +1762,7 @@ function CreateTopicPage({ initialTopic, currentUser, onSave }: { initialTopic?:
   const [selectedTags, setSelectedTags] = useState<string[]>(initialTopic?.tags ?? []);
   const [showTagPanel, setShowTagPanel] = useState(false);
   const [activeL1, setActiveL1] = useState("内容标签");
+  const [openTagBranches, setOpenTagBranches] = useState<Record<string, boolean>>({});
   const showTagsSection = true;
 
   const allApps = APP_TYPES;
@@ -1792,6 +1822,10 @@ function CreateTopicPage({ initialTopic, currentUser, onSave }: { initialTopic?:
       ? prev.filter(tag => !path.includes(tag))
       : Array.from(new Set([...prev, ...path]))
     );
+  }
+  function toggleTagBranch(branch: string) {
+    const key = `${activeL1}/${branch}`;
+    setOpenTagBranches(prev => ({ ...prev, [key]: !prev[key] }));
   }
 
   return (
@@ -1974,26 +2008,48 @@ function CreateTopicPage({ initialTopic, currentUser, onSave }: { initialTopic?:
                         }`}>{l1}</button>
                     ))}
                   </div>
-                  <div className="p-3 grid grid-cols-2 gap-1.5 bg-background max-h-64 overflow-y-auto [&::-webkit-scrollbar]:hidden">
-                    {(TAG_GROUPS[activeL1] || []).map(item => {
-                      const isSelected = item.path.every(tag => selectedTags.includes(tag));
-                      const parentPath = item.path.slice(0, -1).join(" / ");
-                      return (
-                        <button key={item.path.join("/")} onClick={() => toggleTagPath(item.path)}
-                          className={`px-2.5 py-1.5 rounded-lg text-left border transition-all ${
-                            isSelected
-                              ? "bg-blue-600 text-white border-blue-600"
-                              : "bg-card text-muted-foreground border-border hover:border-blue-400 hover:text-foreground"
-                          }`}>
-                          <div className="text-xs font-medium leading-tight">{item.label}</div>
-                          {parentPath && (
-                            <div className={`text-[9px] mt-0.5 truncate ${isSelected ? "text-blue-100" : "text-muted-foreground/60"}`}>
-                              {parentPath}
-                            </div>
-                          )}
+                  <div className="p-3 bg-background max-h-72 overflow-y-auto [&::-webkit-scrollbar]:hidden space-y-3">
+                    {Object.entries((TAG_GROUPS[activeL1] || []).reduce((groups, item) => {
+                      const branch = item.path[1] || activeL1;
+                      groups[branch] = [...(groups[branch] ?? []), item];
+                      return groups;
+                    }, {} as Record<string, { label: string; path: string[] }[]>)).map(([branch, items]) => (
+                      <div key={branch} className="rounded-xl border border-border bg-card overflow-hidden">
+                        <button
+                          type="button"
+                          onClick={() => toggleTagBranch(branch)}
+                          className="w-full flex items-center justify-between bg-muted/60 px-3 py-2 border-b border-border hover:bg-muted transition-colors">
+                          <div className="flex items-center gap-2">
+                            <ChevronRight size={12} className={`text-muted-foreground transition-transform ${openTagBranches[`${activeL1}/${branch}`] ? "rotate-90" : ""}`} />
+                            <span className="text-xs font-semibold text-foreground">{branch}</span>
+                          </div>
+                          <span className="text-[10px] text-muted-foreground">{items.length}</span>
                         </button>
-                      );
-                    })}
+                        {openTagBranches[`${activeL1}/${branch}`] && (
+                        <div className="p-2 grid grid-cols-4 gap-1.5">
+                          {items.map(item => {
+                            const isSelected = item.path.every(tag => selectedTags.includes(tag));
+                            const childPath = item.path.slice(2, -1).join(" / ");
+                            return (
+                              <button key={item.path.join("/")} onClick={() => toggleTagPath(item.path)}
+                                className={`px-2 py-1 rounded-md text-left border transition-all ${
+                                  isSelected
+                                    ? "bg-blue-600 text-white border-blue-600"
+                                    : "bg-background text-muted-foreground border-border hover:border-blue-400 hover:text-foreground"
+                                }`}>
+                                <div className="text-[11px] font-medium leading-tight truncate">{item.label}</div>
+                                {childPath && (
+                                  <div className={`text-[9px] mt-0.5 truncate ${isSelected ? "text-blue-100" : "text-muted-foreground/60"}`}>
+                                    {childPath}
+                                  </div>
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
@@ -2090,7 +2146,6 @@ function SchedulePage({
   const [isTodayInView, setIsTodayInView] = useState(true);
   const [designerSearch, setDesignerSearch] = useState("");
   const [filterGroup, setFilterGroup] = useState("");
-  const [showLegend, setShowLegend] = useState(false);
   const scheduleScrollRef = useRef<HTMLDivElement>(null);
   const now = new Date();
   const timelineStartOffset = -180;
@@ -2173,46 +2228,42 @@ function SchedulePage({
           <h1 className="text-base font-semibold text-foreground">设计师排期</h1>
           <p className="text-xs text-muted-foreground mt-0.5">{monthLabel} · 查看和管理所有设计师的任务时间安排</p>
         </div>
-        <div className="flex items-center justify-end gap-2 text-xs flex-none">
-          <div className="relative">
+        <div className="grid grid-cols-[144px_152px_72px_72px] items-center gap-3 text-xs flex-none">
+          <div className="relative min-w-0">
             <Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input
               value={designerSearch}
               onChange={e => setDesignerSearch(e.target.value)}
               placeholder="搜索设计师"
-              className="pl-8 pr-3 py-1.5 bg-background border border-border rounded-lg text-xs w-36 focus:outline-none focus:ring-2 focus:ring-primary/30" />
+              className="h-8 w-full pl-8 pr-3 bg-background border border-border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-primary/30" />
           </div>
           <SelectField
             value={filterGroup}
             placeholder="全部分组"
             options={groups}
             onChange={setFilterGroup}
-            className="w-32 [&>button]:bg-background [&>button]:py-1.5" />
-          <div className="flex items-center gap-1 rounded-xl border border-border bg-background p-1 shadow-sm">
-            <button onClick={() => {
-              if (scheduleScrollRef.current) {
-                scheduleScrollRef.current.scrollLeft = todayLeft;
-                updateTodayVisibility();
-              }
-            }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                isTodayInView
-                  ? "bg-card text-muted-foreground hover:text-foreground hover:bg-muted border border-border"
-                  : "bg-primary text-primary-foreground shadow-md ring-2 ring-primary/20"
-              }`}>
-              <Calendar size={12} />
-              今天
-            </button>
-          </div>
-          <div className="relative">
+            className="w-full min-w-0 [&>button]:h-8 [&>button]:min-w-0 [&>button]:bg-background [&>button]:py-0" />
+          <button onClick={() => {
+            if (scheduleScrollRef.current) {
+              scheduleScrollRef.current.scrollLeft = todayLeft;
+              updateTodayVisibility();
+            }
+          }}
+            className={`h-8 w-[72px] flex items-center justify-center gap-1.5 rounded-lg px-2 text-xs font-medium transition-colors ${
+              isTodayInView
+                ? "bg-background text-muted-foreground hover:bg-muted hover:text-foreground"
+                : "bg-primary text-primary-foreground shadow-sm"
+            }`}>
+            <Calendar size={12} />
+            今天
+          </button>
+          <div className="relative group">
             <button
-              onClick={() => setShowLegend(v => !v)}
-              className="flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
+              className="h-8 w-[72px] flex items-center justify-center gap-1.5 rounded-lg bg-background px-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
               <Info size={12} />
               图例
             </button>
-            {showLegend && (
-              <div className="absolute right-0 top-full mt-2 w-64 rounded-xl border border-border bg-card p-3 shadow-xl z-50">
+              <div className="pointer-events-none absolute right-0 top-full mt-2 w-44 rounded-xl border border-border bg-card p-3 shadow-xl z-50 opacity-0 translate-y-1 transition-all group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0">
                 <div className="grid grid-cols-2 gap-2 text-[11px]">
                   {legendItems.map(({ color, label }) => (
                     <div key={label} className="flex items-center gap-1.5">
@@ -2221,16 +2272,24 @@ function SchedulePage({
                     </div>
                   ))}
                 </div>
-                <div className="mt-2 border-t border-border pt-2 text-[10px] leading-relaxed text-muted-foreground">
-                  任务 {taskCount} · 设计师 {designers.length} · 平均占用 {avgLoad}天 · 超时 {timeoutTasks} · 高负载 {overloadedDesigners}
-                </div>
               </div>
-            )}
           </div>
-          {showLegend && (
-            <div className="fixed inset-0 z-40" onClick={() => setShowLegend(false)} />
-          )}
         </div>
+      </div>
+
+      <div className="bg-background border-b border-border px-6 py-3 grid grid-cols-5 gap-3 flex-none">
+        {[
+          { label: "任务", value: taskCount, tone: "bg-muted text-muted-foreground" },
+          { label: "设计师", value: designers.length, tone: "bg-blue-50 text-blue-700 border-blue-100" },
+          { label: "平均占用", value: `${avgLoad}天`, tone: "bg-violet-50 text-violet-700 border-violet-100" },
+          { label: "超时", value: timeoutTasks, tone: timeoutTasks ? "bg-red-50 text-red-600 border-red-100" : "bg-emerald-50 text-emerald-700 border-emerald-100" },
+          { label: "高负载", value: overloadedDesigners, tone: overloadedDesigners ? "bg-amber-50 text-amber-700 border-amber-100" : "bg-blue-50 text-blue-700 border-blue-100" },
+        ].map(item => (
+          <div key={item.label} className={`rounded-xl border px-3 py-2 flex items-center justify-between shadow-sm ${item.tone}`}>
+            <span className="text-[11px] font-medium opacity-80">{item.label}</span>
+            <span className="text-base font-bold leading-none">{item.value}</span>
+          </div>
+        ))}
       </div>
 
       <div ref={scheduleScrollRef} onScroll={updateTodayVisibility} className="flex-1 overflow-auto">
@@ -2661,16 +2720,16 @@ function UsersPage({ users, setUsers, currentUser }: { users: typeof MOCK_USERS;
           onAdd={u => { setUsers(prev => [...prev, u]); setSaved(false); }} />
       )}
 
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 overflow-auto relative">
         <table className="w-full text-sm border-collapse">
-          <thead className="bg-background sticky top-0">
+          <thead className="bg-background sticky top-0 z-40 shadow-sm">
             <tr className="border-b border-border">
               {["用户", "邮箱", "管理员", "运营", "设计师", "设计师分组"].map(h => (
-                <th key={h} className="text-left text-xs font-semibold text-muted-foreground px-5 py-3">{h}</th>
+                <th key={h} className="bg-background text-left text-xs font-semibold text-muted-foreground px-5 py-3">{h}</th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="relative z-0">
             {users.map((user, i) => (
               <tr key={user.id} className={`border-b border-border ${i % 2 === 0 ? "bg-card" : "bg-background"} hover:bg-muted/30 transition-colors`}>
                 <td className="px-5 py-3">
