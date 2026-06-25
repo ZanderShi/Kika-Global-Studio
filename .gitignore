@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.pnpm-store/
+*.zip
+.DS_Store
+.env
+.env.local
+.netlify/
+.vercel/
